@@ -17,13 +17,6 @@ import java.util.Optional;
 @RequestMapping("/alertApi")
 public class AlertController {
 
-    Counter hitCounter;
-
-    public AlertController(MeterRegistry meterRegistry){
-        hitCounter = Counter.builder("hit_counter")
-                .description("Number of hits")
-                .register(meterRegistry);
-    }
 
     @Autowired
     private SensorService sensorService;
@@ -31,11 +24,7 @@ public class AlertController {
 
     @GetMapping("/alert")
     public String getAlert(){
-        hitCounter.increment();
-        List<Sensor> sensors = sensorService.getSensors();
-        if(sensors.isEmpty()){
-            return sensorService.getAlert();
-        }
+
         return null;
     }
 
